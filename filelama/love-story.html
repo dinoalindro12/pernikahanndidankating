@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Love Story - John & Jane</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      .love-story {
+        padding: 100px 0;
+        background: linear-gradient(135deg, #f8f0e3 0%, #ffffff 100%);
+      }
+
+      .timeline {
+        position: relative;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px 0;
+      }
+
+      .timeline::after {
+        content: "";
+        position: absolute;
+        width: 6px;
+        background: var(--primary-color);
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        margin-left: -3px;
+        border-radius: 10px;
+      }
+
+      .timeline-item {
+        padding: 10px 40px;
+        position: relative;
+        width: 50%;
+        box-sizing: border-box;
+        margin: 20px 0;
+      }
+
+      .timeline-item:nth-child(odd) {
+        left: 0;
+      }
+
+      .timeline-item:nth-child(even) {
+        left: 50%;
+      }
+
+      .timeline-content {
+        padding: 20px 30px;
+        background: var(--white);
+        position: relative;
+        border-radius: 15px;
+        box-shadow: var(--shadow);
+        transition: transform 0.3s ease;
+      }
+
+      .timeline-content:hover {
+        transform: translateY(-5px);
+      }
+
+      .timeline-date {
+        font-weight: 600;
+        color: var(--primary-color);
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .timeline-icon {
+        width: 60px;
+        height: 60px;
+        background: var(--gold-light);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 20px;
+        z-index: 1;
+        color: var(--primary-color);
+        font-size: 1.5rem;
+        box-shadow: var(--shadow);
+      }
+
+      .timeline-item:nth-child(odd) .timeline-icon {
+        right: -30px;
+      }
+
+      .timeline-item:nth-child(even) .timeline-icon {
+        left: -30px;
+      }
+
+      .timeline-content h3 {
+        color: var(--text-dark);
+        margin-bottom: 10px;
+        font-family: "Playfair Display", serif;
+      }
+
+      .timeline-content p {
+        color: var(--text-light);
+        line-height: 1.6;
+      }
+
+      .story-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 10px;
+        margin: 15px 0;
+      }
+
+      @media (max-width: 768px) {
+        .timeline::after {
+          left: 31px;
+        }
+
+        .timeline-item {
+          width: 100%;
+          padding-left: 70px;
+          padding-right: 25px;
+        }
+
+        .timeline-item:nth-child(even) {
+          left: 0;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-icon,
+        .timeline-item:nth-child(even) .timeline-icon {
+          left: 20px;
+          right: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#couple">Mempelai</a></li>
+        <li><a href="love-story.html">Love Story</a></li>
+        <li><a href="index.html#event">Acara</a></li>
+        <li><a href="gallery.html">Galeri</a></li>
+        <li><a href="index.html#rsvp">RSVP</a></li>
+      </ul>
+    </nav>
+
+    <!-- Love Story Section -->
+    <section class="love-story">
+      <div class="container">
+        <h2 class="section-title">Our Love Story</h2>
+        <p
+          class="section-subtitle"
+          style="
+            text-align: center;
+            margin-bottom: 60px;
+            color: var(--text-light);
+          "
+        >
+          Perjalanan cinta kami yang penuh makna dan kebahagiaan
+        </p>
+
+        <div class="timeline">
+          <!-- Timeline Item 1 -->
+          <div class="timeline-item">
+            <div class="timeline-icon">
+              <i class="fas fa-handshake"></i>
+            </div>
+            <div class="timeline-content">
+              <div class="timeline-date">
+                <i class="far fa-calendar"></i>
+                Maret 2018
+              </div>
+              <h3>Pertemuan Pertama</h3>
+              <p>
+                Kami pertama kali bertemu di acara ulang tahun teman bersama.
+                Saat itu, obrolan singkat di teras rumah menjadi awal dari
+                segalanya.
+              </p>
+              <img
+                src="images/story1.jpg"
+                alt="Pertemuan Pertama"
+                class="story-image"
+              />
+            </div>
+          </div>
+
+          <!-- Timeline Item 2 -->
+          <div class="timeline-item">
+            <div class="timeline-icon">
+              <i class="fas fa-coffee"></i>
+            </div>
+            <div class="timeline-content">
+              <div class="timeline-date">
+                <i class="far fa-calendar"></i>
+                Juni 2018
+              </div>
+              <h3>Kencan Pertama</h3>
+              <p>
+                Kami memutuskan untuk bertemu lagi di kafe kecil di pusat kota.
+                Percakapan selama 3 jam terasa seperti hanya 5 menit.
+              </p>
+              <img
+                src="images/story2.jpg"
+                alt="Kencan Pertama"
+                class="story-image"
+              />
+            </div>
+          </div>
+
+          <!-- Timeline Item 3 -->
+          <div class="timeline-item">
+            <div class="timeline-icon">
+              <i class="fas fa-heart"></i>
+            </div>
+            <div class="timeline-content">
+              <div class="timeline-date">
+                <i class="far fa-calendar"></i>
+                Desember 2018
+              </div>
+              <h3>Jadian</h3>
+              <p>
+                Di malam tahun baru, di bawah langit penuh bintang, kami resmi
+                menjadi pasangan. Momen yang takkan pernah terlupakan.
+              </p>
+              <img src="images/story3.jpg" alt="Jadian" class="story-image" />
+            </div>
+          </div>
+
+          <!-- Timeline Item 4 -->
+          <div class="timeline-item">
+            <div class="timeline-icon">
+              <i class="fas fa-plane"></i>
+            </div>
+            <div class="timeline-content">
+              <div class="timeline-date">
+                <i class="far fa-calendar"></i>
+                Juli 2019
+              </div>
+              <h3>Perjalanan Pertama</h3>
+              <p>
+                Liburan pertama kami ke Bali. Mengunjungi pantai, melihat
+                sunset, dan membuat kenangan indah bersama.
+              </p>
+              <img
+                src="images/story4.jpg"
+                alt="Perjalanan Pertama"
+                class="story-image"
+              />
+            </div>
+          </div>
+
+          <!-- Timeline Item 5 -->
+          <div class="timeline-item">
+            <div class="timeline-icon">
+              <i class="fas fa-gem"></i>
+            </div>
+            <div class="timeline-content">
+              <div class="timeline-date">
+                <i class="far fa-calendar"></i>
+                Februari 2023
+              </div>
+              <h3>Lamaran</h3>
+              <p>
+                Di restoran favorit kami, dengan latar musik jazz dan
+                pemandangan kota, John melamar Jane. Jawabannya? Tentu saja
+                "Iya!"
+              </p>
+              <img src="images/story5.jpg" alt="Lamaran" class="story-image" />
+            </div>
+          </div>
+
+          <!-- Timeline Item 6 -->
+          <div class="timeline-item">
+            <div class="timeline-icon">
+              <i class="fas fa-ring"></i>
+            </div>
+            <div class="timeline-content">
+              <div class="timeline-date">
+                <i class="far fa-calendar"></i>
+                Desember 2024
+              </div>
+              <h3>Hari Bahagia</h3>
+              <p>
+                Dan kini, kami akan menyatukan hati dan jiwa dalam ikatan suci
+                pernikahan. Bersama-sama melanjutkan perjalanan hidup.
+              </p>
+              <img
+                src="images/story6.jpg"
+                alt="Hari Bahagia"
+                class="story-image"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quote Section -->
+    <section
+      class="quote-section"
+      style="
+        padding: 80px 0;
+        background: var(--primary-color);
+        color: white;
+        text-align: center;
+      "
+    >
+      <div class="container">
+        <i
+          class="fas fa-quote-left"
+          style="font-size: 3rem; margin-bottom: 30px; opacity: 0.7"
+        ></i>
+        <h2
+          style="
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            font-style: italic;
+          "
+        >
+          "Cinta bukan tentang menemukan orang yang sempurna, tapi tentang
+          melihat orang yang tidak sempurna dengan cara yang sempurna."
+        </h2>
+        <p style="font-size: 1.2rem">- John & Jane -</p>
+      </div>
+    </section>
+
+    <script src="script.js"></script>
+  </body>
+</html>

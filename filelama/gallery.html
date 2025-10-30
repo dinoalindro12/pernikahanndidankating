@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Galeri - Harti & Dasri</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      .gallery-page {
+        padding: 140px 0 100px;
+        background: linear-gradient(
+          135deg,
+          var(--catholic-cream),
+          var(--catholic-white)
+        );
+        min-height: 100vh;
+        position: relative;
+      }
+
+      .gallery-page::before {
+        content: "📸";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 25rem;
+        opacity: 0.02;
+        z-index: 0;
+      }
+
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 25px;
+        margin-top: 50px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .gallery-item {
+        position: relative;
+        overflow: hidden;
+        border-radius: 15px;
+        aspect-ratio: 1;
+        cursor: pointer;
+        box-shadow: var(--shadow);
+        border: 3px solid var(--catholic-white);
+        transition: all 0.4s ease;
+      }
+
+      .gallery-item::before {
+        content: "✝";
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 1.5rem;
+        color: var(--catholic-gold);
+        opacity: 0;
+        z-index: 2;
+        transition: opacity 0.3s ease;
+      }
+
+      .gallery-item:hover::before {
+        opacity: 0.8;
+      }
+
+      .gallery-item:hover {
+        transform: scale(1.05);
+        box-shadow: var(--shadow-heavy);
+        border-color: var(--catholic-gold);
+      }
+
+      .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.4s ease;
+      }
+
+      .gallery-item:hover img {
+        transform: scale(1.1);
+      }
+
+      .gallery-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to top,
+          rgba(139, 69, 19, 0.9),
+          transparent
+        );
+        display: flex;
+        align-items: flex-end;
+        padding: 20px;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .gallery-item:hover .gallery-overlay {
+        opacity: 1;
+      }
+
+      .gallery-caption {
+        color: white;
+        font-weight: 600;
+        font-size: 1.1rem;
+      }
+
+      /* Lightbox */
+      .lightbox {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.95);
+        z-index: 9999;
+        padding: 50px;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .lightbox.active {
+        display: flex;
+      }
+
+      .lightbox-content {
+        max-width: 90%;
+        max-height: 90%;
+        position: relative;
+      }
+
+      .lightbox-content img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        border-radius: 10px;
+        box-shadow: 0 0 50px rgba(212, 175, 55, 0.3);
+      }
+
+      .lightbox-close {
+        position: absolute;
+        top: -40px;
+        right: 0;
+        background: var(--catholic-gold);
+        color: white;
+        border: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 1.5rem;
+        transition: all 0.3s ease;
+      }
+
+      .lightbox-close:hover {
+        background: var(--catholic-brown);
+        transform: rotate(90deg);
+      }
+
+      .filter-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        flex-wrap: wrap;
+        margin: 40px 0;
+      }
+
+      .filter-btn {
+        padding: 12px 30px;
+        background: var(--catholic-white);
+        border: 2px solid var(--catholic-gold);
+        color: var(--catholic-brown);
+        border-radius: 25px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: 600;
+      }
+
+      .filter-btn:hover,
+      .filter-btn.active {
+        background: var(--catholic-gold);
+        color: white;
+      }
+
+      @media (max-width: 768px) {
+        .gallery-grid {
+          grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+          gap: 15px;
+        }
+
+        .lightbox {
+          padding: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Music Player -->
+    <div class="music-player">
+      <button id="musicToggle">
+        <i class="fas fa-music"></i>
+        <span id="musicText">Putar Musik</span>
+      </button>
+      <audio id="weddingMusic" loop>
+        <source src="music/ave-maria.mp3" type="audio/mpeg" />
+      </audio>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="couple.html">Mempelai</a></li>
+        <li><a href="event.html">Acara</a></li>
+        <li><a href="gallery.html" class="active">Galeri</a></li>
+        <li><a href="rsvp.html">RSVP</a></li>
+      </ul>
+    </nav>
+
+    <!-- Cross Animation -->
+    <div class="cross-animation"></div>
+
+    <section class="gallery-page">
+      <div class="container">
+        <div class="event-hero" style="text-align: center; margin-bottom: 60px">
+          <div class="catholic-icon">
+            <i class="fas fa-images"></i>
+          </div>
+          <h1 class="section-title">Galeri Foto</h1>
+          <p class="section-subtitle">
+            Momen indah perjalanan cinta kami yang penuh berkah
+          </p>
+        </div>
+
+        <!-- Filter Buttons -->
+        <div class="filter-buttons">
+          <button class="filter-btn active" data-filter="all">
+            <i class="fas fa-th"></i> Semua Foto
+          </button>
+          <button class="filter-btn" data-filter="prewedding">
+            <i class="fas fa-heart"></i> Prewedding
+          </button>
+          <button class="filter-btn" data-filter="engagement">
+            <i class="fas fa-ring"></i> Lamaran
+          </button>
+          <button class="filter-btn" data-filter="moments">
+            <i class="fas fa-camera"></i> Momen Bersama
+          </button>
+        </div>
+
+        <!-- Gallery Grid -->
+        <div class="gallery-grid">
+          <!-- Prewedding Photos -->
+          <div class="gallery-item" data-category="prewedding">
+            <img src="images/fotoberda.jpg" alt="Prewedding 1" />
+            <div class="gallery-overlay">
+              <span class="gallery-caption">Prewedding Session</span>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="prewedding">
+            <img src="images/fotoberdua.jpg" alt="Prewedding 2" />
+            <div class="gallery-overlay">
+              <span class="gallery-caption">Love in Every Moment</span>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="prewedding">
+            <img src="images/keluarg kae endi.jpg" alt="Prewedding 3" />
+            <div class="gallery-overlay">
+              <span class="gallery-caption">Together Forever</span>
+            </div>
+          </div>
+
+          <!-- Engagement Photos -->
+          <div class="gallery-item" data-category="engagement">
+            <img src="images/keluargabesar.jpg" alt="Lamaran 1" />
+            <div class="gallery-overlay">
+              <span class="gallery-caption">She Said Yes!</span>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="engagement">
+            <img src="images/engagement2.jpg" alt="Lamaran 2" />
+            <div class="gallery-overlay">
+              <span class="gallery-caption">Special Moment</span>
+            </div>
+          </div>
+
+          <!-- Moments Photos -->
+          <div class="gallery-item" data-category="moments">
+            <img src="images/moment1.jpg" alt="Moment 1" />
+            <div class="gallery-overlay">
+              <span class="gallery-caption">Happy Together</span>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="moments">
+            <img src="images/moment2.jpg" alt="Moment 2" />
+            <div class="gallery-overlay">
+              <span class="gallery-caption">Beautiful Day</span>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="moments">
+            <img src="images/kakakatikkakjiu.jpg" alt="Moment 3" />
+            <div class="gallery-overlay">
+              <span class="gallery-caption">Sweet Memories</span>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="moments">
+            <img src="images/moment4.jpg" alt="Moment 4" />
+            <div class="gallery-overlay">
+              <span class="gallery-caption">Blessed Love</span>
+            </div>
+          </div>
+
+          <!-- Add more gallery items as needed -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+      <div class="lightbox-content">
+        <button class="lightbox-close" onclick="closeLightbox()">×</button>
+        <img id="lightbox-img" src="" alt="Enlarged photo" />
+      </div>
+    </div>
+
+    <script>
+      // Gallery Filter
+      const filterButtons = document.querySelectorAll(".filter-btn");
+      const galleryItems = document.querySelectorAll(".gallery-item");
+
+      filterButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const filter = button.dataset.filter;
+
+          // Update active button
+          filterButtons.forEach((btn) => btn.classList.remove("active"));
+          button.classList.add("active");
+
+          // Filter items
+          galleryItems.forEach((item) => {
+            if (filter === "all" || item.dataset.category === filter) {
+              item.style.display = "block";
+              setTimeout(() => {
+                item.style.opacity = "1";
+                item.style.transform = "scale(1)";
+              }, 10);
+            } else {
+              item.style.opacity = "0";
+              item.style.transform = "scale(0.8)";
+              setTimeout(() => {
+                item.style.display = "none";
+              }, 300);
+            }
+          });
+        });
+      });
+
+      // Lightbox
+      const lightbox = document.getElementById("lightbox");
+      const lightboxImg = document.getElementById("lightbox-img");
+
+      galleryItems.forEach((item) => {
+        item.addEventListener("click", () => {
+          const img = item.querySelector("img");
+          lightboxImg.src = img.src;
+          lightbox.classList.add("active");
+          document.body.style.overflow = "hidden";
+        });
+      });
+
+      function closeLightbox() {
+        lightbox.classList.remove("active");
+        document.body.style.overflow = "auto";
+      }
+
+      // Close lightbox on background click
+      lightbox.addEventListener("click", (e) => {
+        if (e.target === lightbox) {
+          closeLightbox();
+        }
+      });
+
+      // Close lightbox with Escape key
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && lightbox.classList.contains("active")) {
+          closeLightbox();
+        }
+      });
+    </script>
+
+    <script src="script.js"></script>
+  </body>
+</html>

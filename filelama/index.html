@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Undangan Pernikahan - Harti & Dasri</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      :root {
+        --primary-gold: #d4af37;
+        --primary-cream: #fff5f5;
+        --primary-rose: #c9a690;
+        --primary-white: #ffffff;
+        --primary-dark: #4a4a4a;
+        --primary-light: #f5e6d3;
+        --accent-pink: #f8d7da;
+      }
+
+      /* Navigation Styles */
+      .navbar-index {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(10px);
+        z-index: 999;
+        padding: 15px 0;
+        box-shadow: 0 2px 20px rgba(212, 175, 55, 0.15);
+        transform: translateY(-100%);
+        transition: transform 0.3s ease;
+      }
+
+      .navbar-index.visible {
+        transform: translateY(0);
+      }
+
+      .navbar-index ul {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        gap: 40px;
+        margin: 0;
+        padding: 0;
+      }
+
+      .navbar-index a {
+        text-decoration: none;
+        color: var(--primary-rose);
+        font-weight: 500;
+        transition: color 0.3s ease;
+        position: relative;
+        font-size: 0.95rem;
+      }
+
+      .navbar-index a:hover {
+        color: var(--primary-gold);
+      }
+
+      .navbar-index a.active {
+        color: var(--primary-gold);
+      }
+
+      .navbar-index a::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--primary-gold);
+        transition: width 0.3s ease;
+      }
+
+      .navbar-index a:hover::after,
+      .navbar-index a.active::after {
+        width: 100%;
+      }
+
+      /* Cover Section dengan Nuansa Romantic */
+      .cover-page {
+        height: 100vh;
+        background: linear-gradient(
+            rgba(74, 74, 74, 0.7),
+            rgba(139, 69, 19, 0.6)
+          ),
+          url("images/wedding-background.jpg") center/cover;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: var(--primary-white);
+        position: relative;
+        overflow: hidden;
+        font-family: "Playfair Display", serif;
+      }
+
+      .romantic-decoration {
+        position: absolute;
+        font-size: 8rem;
+        color: rgba(255, 255, 255, 0.1);
+        z-index: 1;
+      }
+
+      .ring-left {
+        top: 20%;
+        left: 10%;
+        animation: gentleFloat 6s ease-in-out infinite;
+      }
+
+      .ring-right {
+        bottom: 20%;
+        right: 10%;
+        animation: gentleFloat 8s ease-in-out infinite reverse;
+      }
+
+      .cover-content {
+        z-index: 2;
+        position: relative;
+        animation: fadeInUp 1.5s ease-out;
+        max-width: 800px;
+        padding: 0 20px;
+      }
+
+      .romantic-icon {
+        font-size: 3rem;
+        margin-bottom: 20px;
+        color: var(--primary-gold);
+        opacity: 0.9;
+        animation: gentlePulse 3s ease-in-out infinite;
+      }
+
+      .subtitle {
+        font-family: "Great Vibes", cursive;
+        font-size: 2.8rem;
+        margin-bottom: 10px;
+        opacity: 0;
+        animation: fadeInUp 1s ease 0.5s forwards;
+        color: var(--primary-white);
+        text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 0, 0, 0.5);
+      }
+
+      /* Latar belakang nama yang cerah */
+      .bride-groom-container {
+        position: relative;
+        margin: 30px 0;
+        padding: 40px 20px;
+        background: rgba(0, 0, 0, 0.4);
+        border-radius: 20px;
+        backdrop-filter: blur(15px);
+        border: 2px solid rgba(212, 175, 55, 0.6);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      }
+
+      .bride-groom-name {
+        font-family: "Playfair Display", serif;
+        font-size: 4.5rem;
+        margin: 0;
+        opacity: 0;
+        animation: fadeInUp 1s ease 1s forwards;
+        line-height: 1.2;
+        text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.9), 0 0 30px rgba(0, 0, 0, 0.6);
+        color: var(--primary-white);
+        font-weight: 700;
+      }
+
+      .bride-groom-name span {
+        color: #ffd700;
+        margin: 0 25px;
+        font-size: 3rem;
+        text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.9),
+          0 0 20px rgba(255, 215, 0, 0.5);
+      }
+
+      .wedding-text {
+        font-family: "Great Vibes", cursive;
+        font-size: 1.8rem;
+        margin: 10px 0 30px 0;
+        opacity: 0;
+        animation: fadeInUp 1s ease 1.2s forwards;
+        color: var(--primary-white);
+        text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
+      }
+
+      .date {
+        font-size: 1.8rem;
+        letter-spacing: 4px;
+        opacity: 0;
+        animation: fadeInUp 1s ease 1.5s forwards;
+        color: var(--primary-white);
+        text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 0, 0, 0.5);
+        margin-bottom: 30px;
+        font-weight: 600;
+      }
+
+      .bible-verse {
+        font-style: italic;
+        font-size: 1.2rem;
+        margin-bottom: 40px;
+        opacity: 0;
+        animation: fadeInUp 1s ease 1.8s forwards;
+        color: var(--primary-white);
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.6;
+        text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
+      }
+
+      .enter-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        margin-top: 30px;
+        padding: 18px 45px;
+        background: transparent;
+        color: var(--primary-white);
+        border: 2px solid var(--primary-gold);
+        border-radius: 50px;
+        text-decoration: none;
+        font-size: 1.2rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        opacity: 0;
+        animation: fadeInUp 1s ease 2s forwards;
+        backdrop-filter: blur(10px);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .enter-btn::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(212, 175, 55, 0.4),
+          transparent
+        );
+        transition: left 0.5s ease;
+      }
+
+      .enter-btn:hover::before {
+        left: 100%;
+      }
+
+      .enter-btn:hover {
+        background: var(--primary-gold);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(212, 175, 55, 0.5);
+      }
+
+      .scroll-indicator {
+        position: absolute;
+        bottom: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: var(--primary-white);
+        opacity: 0;
+        animation: fadeIn 1s ease 2.5s forwards;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+      }
+
+      .scroll-indicator i {
+        animation: bounce 2s infinite;
+        font-size: 1.5rem;
+      }
+
+      .sparkle-animation {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      .sparkle {
+        position: absolute;
+        color: rgba(255, 255, 255, 0.4);
+        font-size: 16px;
+        animation: sparkleFall linear forwards;
+      }
+
+      @keyframes gentleFloat {
+        0%,
+        100% {
+          transform: translateY(0px) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-20px) rotate(5deg);
+        }
+      }
+
+      @keyframes gentlePulse {
+        0%,
+        100% {
+          opacity: 0.8;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1.15);
+        }
+      }
+
+      @keyframes sparkleFall {
+        to {
+          transform: translateY(100vh) rotate(360deg);
+          opacity: 0;
+        }
+      }
+
+      @keyframes bounce {
+        0%,
+        20%,
+        50%,
+        80%,
+        100% {
+          transform: translateY(0);
+        }
+        40% {
+          transform: translateY(-10px);
+        }
+        60% {
+          transform: translateY(-5px);
+        }
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      /* Quick Info Section */
+      .quick-info {
+        padding: 80px 0;
+        background: linear-gradient(135deg, var(--primary-cream), #ffffff);
+        position: relative;
+      }
+
+      .quick-info::before {
+        content: "💍";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 15rem;
+        opacity: 0.03;
+        z-index: 1;
+      }
+
+      .quick-info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        text-align: center;
+        position: relative;
+        z-index: 2;
+      }
+
+      .info-card {
+        background: var(--primary-white);
+        padding: 40px 25px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(212, 175, 55, 0.15);
+        transition: all 0.3s ease;
+        border: 1px solid rgba(212, 175, 55, 0.2);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .info-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(
+          90deg,
+          var(--primary-gold),
+          var(--primary-rose)
+        );
+      }
+
+      .info-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(212, 175, 55, 0.25);
+      }
+
+      .info-card i {
+        font-size: 3rem;
+        color: var(--primary-gold);
+        margin-bottom: 20px;
+        transition: transform 0.3s ease;
+      }
+
+      .info-card:hover i {
+        transform: scale(1.1);
+      }
+
+      .info-card h3 {
+        color: var(--primary-rose);
+        margin-bottom: 15px;
+        font-family: "Playfair Display", serif;
+        font-size: 1.4rem;
+      }
+
+      .info-card p {
+        color: var(--primary-dark);
+        font-size: 1.1rem;
+        font-weight: 500;
+      }
+
+      /* Mobile Responsive */
+      @media (max-width: 768px) {
+        .navbar-index ul {
+          gap: 20px;
+          flex-wrap: wrap;
+        }
+
+        .navbar-index a {
+          font-size: 0.9rem;
+        }
+
+        .bride-groom-name {
+          font-size: 3rem;
+        }
+
+        .bride-groom-name span {
+          font-size: 2rem;
+          margin: 0 15px;
+        }
+
+        .subtitle {
+          font-size: 2.2rem;
+        }
+
+        .ring-left,
+        .ring-right {
+          display: none;
+        }
+
+        .quick-info-grid {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .navbar-index ul {
+          gap: 15px;
+        }
+
+        .navbar-index a {
+          font-size: 0.8rem;
+        }
+
+        .bride-groom-name {
+          font-size: 2.2rem;
+        }
+
+        .enter-btn {
+          padding: 15px 35px;
+          font-size: 1rem;
+        }
+
+        .date {
+          font-size: 1.4rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Music Player -->
+    <div class="music-player">
+      <button id="musicToggle">
+        <i class="fas fa-music"></i>
+        <span id="musicText">Putar Musik</span>
+      </button>
+      <audio id="weddingMusic" loop>
+        <source src="music/laguorigin.webm" type="audio/mpeg" />
+      </audio>
+    </div>
+
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+      <div class="loading-content">
+        <div class="ring" style="border-top-color: #d4af37"></div>
+        <h2>Memuat Undangan...</h2>
+        <p>Dengan penuh kebahagiaan, kami mengundang Anda</p>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar-index" id="navbar">
+      <ul>
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="couple.html">Mempelai</a></li>
+        <li><a href="event.html">Acara</a></li>
+        <li><a href="gallery.html">Galeri</a></li>
+        <li><a href="rsvp.html">RSVP</a></li>
+      </ul>
+    </nav>
+
+    <!-- Cover Section -->
+    <section class="cover-page" id="cover">
+      <!-- Ring Decorations -->
+      <div class="romantic-decoration ring-left">💍</div>
+      <div class="romantic-decoration ring-right">💍</div>
+
+      <div class="sparkle-animation" id="sparkleContainer"></div>
+
+      <div class="cover-content">
+        <div class="romantic-icon">
+          <i class="fas fa-ring"></i>
+        </div>
+
+        <h3 class="subtitle">Pernikahan Kami</h3>
+
+        <div class="bride-groom-container">
+          <h1 class="bride-groom-name">Harti <span>&</span> Dasri</h1>
+        </div>
+
+        <p class="wedding-text">Akan Menyatukan Dua Hati Dalam Ikatan Suci</p>
+
+        <p class="date">28 • 12 • 2024</p>
+
+        <div class="bible-verse">
+          "Demikianlah mereka bukan lagi dua, melainkan satu. Karena itu, apa
+          yang telah dipersatukan Allah, tidak boleh diceraikan manusia."<br />
+          <strong>- Matius 19:6 -</strong>
+        </div>
+
+        <a href="couple.html" class="enter-btn">
+          <i class="fas fa-heart"></i>
+          Buka Undangan
+          <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+
+      <div class="scroll-indicator">
+        <span>Geser untuk informasi</span>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+    </section>
+
+    <!-- Quick Info Section -->
+    <section class="quick-info">
+      <div class="container">
+        <div class="quick-info-grid">
+          <div class="info-card">
+            <i class="fas fa-church"></i>
+            <h3>Misa Pemberkatan</h3>
+            <p>Gereja Katolik<br />St. Petrus</p>
+          </div>
+          <div class="info-card">
+            <i class="fas fa-calendar-alt"></i>
+            <h3>Tanggal</h3>
+            <p>Sabtu<br />28 Desember 2024</p>
+          </div>
+          <div class="info-card">
+            <i class="fas fa-clock"></i>
+            <h3>Waktu Misa</h3>
+            <p>10:00 WIB<br />Kudus</p>
+          </div>
+          <div class="info-card">
+            <i class="fas fa-glass-cheers"></i>
+            <h3>Resepsi</h3>
+            <p>13:00 WIB<br />Ballroom Hotel</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      // Navigation Show/Hide on Scroll
+      const navbar = document.getElementById("navbar");
+      let lastScrollY = window.scrollY;
+
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 100) {
+          navbar.classList.add("visible");
+        } else {
+          navbar.classList.remove("visible");
+        }
+
+        if (window.scrollY > lastScrollY && window.scrollY > 100) {
+          navbar.style.transform = "translateY(-100%)";
+        } else {
+          navbar.style.transform = "translateY(0)";
+        }
+        lastScrollY = window.scrollY;
+      });
+
+      // Sparkle Animation
+      function createSparkles() {
+        const container = document.getElementById("sparkleContainer");
+        setInterval(() => {
+          const sparkle = document.createElement("div");
+          sparkle.className = "sparkle";
+          sparkle.innerHTML = "✨";
+          sparkle.style.left = Math.random() * 100 + "%";
+          sparkle.style.fontSize = Math.random() * 12 + 8 + "px";
+          sparkle.style.opacity = Math.random() * 0.4 + 0.2;
+          sparkle.style.animationDuration = Math.random() * 8 + 6 + "s";
+
+          container.appendChild(sparkle);
+
+          setTimeout(() => {
+            sparkle.remove();
+          }, 14000);
+        }, 500);
+      }
+
+      // Music Player
+      const musicToggle = document.getElementById("musicToggle");
+      const weddingMusic = document.getElementById("weddingMusic");
+      const musicText = document.getElementById("musicText");
+
+      if (musicToggle && weddingMusic) {
+        musicToggle.addEventListener("click", function () {
+          if (weddingMusic.paused) {
+            weddingMusic.play();
+            musicText.textContent = "Musik Diputar";
+            musicToggle.style.background = "#c9a690";
+          } else {
+            weddingMusic.pause();
+            musicText.textContent = "Putar Musik";
+            musicToggle.style.background = "#d4af37";
+          }
+        });
+
+        document.addEventListener(
+          "click",
+          function initAudio() {
+            if (weddingMusic.paused) {
+              weddingMusic.play().then(() => {
+                musicText.textContent = "Musik Diputar";
+                musicToggle.style.background = "#c9a690";
+              });
+            }
+            document.removeEventListener("click", initAudio);
+          },
+          { once: true }
+        );
+      }
+
+      // Loading Screen
+      window.addEventListener("load", function () {
+        const loadingScreen = document.getElementById("loadingScreen");
+        setTimeout(() => {
+          loadingScreen.classList.add("hidden");
+          setTimeout(() => {
+            loadingScreen.style.display = "none";
+            createSparkles();
+          }, 500);
+        }, 2500);
+      });
+
+      // Add additional styles
+      const style = document.createElement("style");
+      style.textContent = `
+        .loading-screen {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(135deg, #fff5f5, #ffffff);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          z-index: 9999;
+          transition: opacity 0.5s ease;
+          font-family: 'Playfair Display', serif;
+        }
+
+        .loading-screen.hidden {
+          opacity: 0;
+          pointer-events: none;
+        }
+
+        .loading-content {
+          text-align: center;
+          color: #c9a690;
+        }
+
+        .ring {
+          width: 80px;
+          height: 80px;
+          border: 4px solid #f5e6d3;
+          border-top: 4px solid #d4af37;
+          border-radius: 50%;
+          animation: spin 1s linear infinite;
+          margin: 0 auto 20px;
+        }
+
+        .music-player {
+          position: fixed;
+          top: 20px;
+          right: 20px;
+          z-index: 1000;
+        }
+
+        #musicToggle {
+          background: #d4af37;
+          color: #FFFFFF;
+          border: none;
+          padding: 12px 20px;
+          border-radius: 25px;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          font-size: 14px;
+          box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+          transition: all 0.3s ease;
+          font-family: 'Poppins', sans-serif;
+        }
+
+        #musicToggle:hover {
+          background: #c9a690;
+          transform: translateY(-2px);
+        }
+
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+
+        .container {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 20px;
+        }
+      `;
+      document.head.appendChild(style);
+    </script>
+  </body>
+</html>
